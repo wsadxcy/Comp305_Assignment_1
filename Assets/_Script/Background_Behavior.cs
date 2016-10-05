@@ -4,6 +4,7 @@ using System.Collections;
 public class Background_Behavior : MonoBehaviour
 {
     // PRIVATE INSTANCE VARIABLES +++++++++++++++++++++++++++++
+    [Header("Attribute")]
     public float Speed = 0.1f;
 
 

@@ -3,13 +3,16 @@ using System.Collections;
 
 public class Disc_Behaviour : MonoBehaviour {
 
-
+    [Header("Sounds")]
+    public AudioSource ExplosionSound;
+    public AudioSource Bullethit;
+    [Header("Attribute")]
     // How many times should I be hit before I die
     public int health = 2;
-
+    [Header("GameObject")]
     // When the enemy dies, we play an explosion
     public Transform explosion;
-    private Random random = new Random();
+    public GameObject powerup;
 
     // PRIVATE INSTANCE VARIABLES +++++++++++++++++++++++++++++
     private int _speed;
@@ -62,7 +65,7 @@ public class Disc_Behaviour : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D theCollision)
     {
         // Uncomment this line to check for collision
-        Debug.Log("Hit" + theCollision.gameObject.name);
+        // Debug.Log("Hit" + theCollision.gameObject.name);
         // this line looks for "bullet" in the names of
         // anything collided.
         if (theCollision.gameObject.name.Contains("bullet"))
@@ -71,15 +74,23 @@ public class Disc_Behaviour : MonoBehaviour {
                 theCollision.gameObject.GetComponent
                 ("BulletBehaviour") as BulletBehaviour;
             health -= bullet.damage;
+            this.Bullethit.Play();
             Destroy(theCollision.gameObject);
         }
         if (health <= 0)
         {
+            this.ExplosionSound.Play();
             // Check if explosion was set
             if (explosion)
             {
                 GameObject exploder = ((Transform)Instantiate(explosion, this.
                     transform.position, this.transform.rotation)).gameObject;
+
+                 if (Random.Range(0,8) < 1)
+                 {
+                    GameObject powerupper = ((Transform)Instantiate(powerup, this.
+                    transform.position, Quaternion.identity)).gameObject;
+                 }
                 Destroy(exploder, 2.0f);
             }
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class CoinController : MonoBehaviour {
 
     // PRIVATE INSTANCE VARIABLES +++++++++++++++++++++++++++++
-    private int _speed = 1;
+    private int _speed = 2;
     private Transform _transform;
 
     // PUBLIC PROPERTIES
@@ -25,15 +25,12 @@ public class CoinController : MonoBehaviour {
     void Start()
     {
         this._transform = this.GetComponent<Transform>();
-
-        this._reset();
     }
 
     // Update is called once per frame
     void Update()
     {
         this._move();
-        this._checkBounds();
     }
 
     /**
@@ -48,25 +45,7 @@ public class CoinController : MonoBehaviour {
         this._transform.position = newPosition;
     }
 
-    /**
-	 * this method checks to see if the game object meets the top-border of the screen
-	 */
-    private void _checkBounds()
-    {
-        if (this._transform.position.x <= -680f)
-        {
-            this._reset();
-        }
-    }
 
-    /**
-	 * this method resets the game object to the original position
-	 */
-    private void _reset()
-    {
-        this._speed = 1;
-        this._transform.position = new Vector2(680f, Random.Range(-375f, 375f));
-    }
 
 
     void OnTriggerEnter2D(Collider2D other)

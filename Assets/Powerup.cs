@@ -26,14 +26,12 @@ public class Powerup : MonoBehaviour {
     {
         this._transform = this.GetComponent<Transform>();
 
-        this._reset();
     }
 
     // Update is called once per frame
     void Update()
     {
         this._move();
-        this._checkBounds();
     }
 
     /**
@@ -48,32 +46,8 @@ public class Powerup : MonoBehaviour {
         this._transform.position = newPosition;
     }
 
-    /**
-	 * this method checks to see if the game object meets the top-border of the screen
-	 */
-    private void _checkBounds()
-    {
-        if (this._transform.position.x <= -680f)
-        {
-            this._reset();
-        }
-    }
-
-    /**
-	 * this method resets the game object to the original position
-	 */
-    private void _reset()
-    {
-        this._speed = 1;
-        this._transform.position = new Vector2(680f, Random.Range(-375f, 375f));
-    }
 
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Destroy(this.gameObject);
-        }
-    }
+
+
 }

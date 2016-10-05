@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class Strate_Behaviour : MonoBehaviour {
-
+    [Header("Attribute")]
     // How long the laser will live
     public float lifetime = 6.0f;
     // How fast will the laser move
     public float speed = 450.0f;
-
+    [Header("GameObject")]
     // When the enemy dies, we play an explosion
     public Transform explosion;
     // Use this for initialization

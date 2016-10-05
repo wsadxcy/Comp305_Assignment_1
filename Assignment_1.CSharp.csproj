@@ -74,6 +74,7 @@
     <Compile Include="Assets\_Script\GameController.cs" />
     <Compile Include="Assets\_Script\HomingEnemy_Behaviour.cs" />
     <Compile Include="Assets\_Script\Laser_Behaviour.cs" />
+    <Compile Include="Assets\_Script\MenuController.cs" />
     <Compile Include="Assets\_Script\Player_Behavior.cs" />
     <Compile Include="Assets\_Script\ShootingEnemyBehaviour.cs" />
     <Compile Include="Assets\_Script\StrateEnemyBehaviour.cs" />

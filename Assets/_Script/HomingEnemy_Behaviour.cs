@@ -3,16 +3,20 @@ using System.Collections;
 
 public class HomingEnemy_Behaviour : MonoBehaviour
 {
+
+    [Header("Sounds")]
+    public AudioSource ExplosionSound;
+
+    [Header("Attribute")]
     // How many times should I be hit before I die
     public int health = 1;
-
+    public float speed = 700.0f;
+    [Header("GameObject")]
     // When the enemy dies, we play an explosion
     public Transform explosion;
 
 
     private Transform player;
-    public float speed = 700.0f;
-
     private GameController controller;
 
     // Use this for initialization
@@ -30,7 +34,7 @@ public class HomingEnemy_Behaviour : MonoBehaviour
         float moveSpeed = speed * Time.deltaTime;
         transform.position = transform.position + (delta * moveSpeed);
     }
-
+    // Detact Collision that is trigger
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -38,11 +42,13 @@ public class HomingEnemy_Behaviour : MonoBehaviour
             // Check if explosion was set
             if (explosion)
             {
+                // Instanciate explosion
                 GameObject exploder = ((Transform)Instantiate(explosion, this.
                     transform.position, this.transform.rotation)).gameObject;
                 Destroy(exploder, 2.0f);
             }
             Destroy(this.gameObject);
+            this.ExplosionSound.Play();
         }
     }
 
@@ -66,10 +72,12 @@ public class HomingEnemy_Behaviour : MonoBehaviour
             // Check if explosion was set
             if (explosion)
             {
+                this.ExplosionSound.Play();
                 GameObject exploder = ((Transform)Instantiate(explosion, this.
                     transform.position, this.transform.rotation)).gameObject;
                 Destroy(exploder, 2.0f);
             }
+            
             Destroy(this.gameObject);
             controller.IncreaseScore(50);
         }

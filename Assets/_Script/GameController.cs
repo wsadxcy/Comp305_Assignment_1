@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     private int _livesValue;
     private int _scoreValue;
     private AudioSource _endGameSound;
+    private int BigShipNum;
 
 
     // PUBLIC INSTANCE VARIABLES (TESTING) +++++++++
@@ -29,11 +30,14 @@ public class GameController : MonoBehaviour {
     public GameObject Coin;
     public GameObject Strate;
 
+    [Header("Sound")]
+    public AudioSource GameOver;
 
 
-    private float InstantiationTimerD = 5.0f;
-    private float InstantiationTimerH = 5.0f;
-    private float InstantiationTimerS = 5.0f;
+
+    private float InstantiationTimerD = 0.0f;
+    private float InstantiationTimerH = 0.0f;
+    private float InstantiationTimerS = 10.0f;
     private float InstantiationTimerC = 20.0f;
     private float InstantiationTimerM = 20.0f;
 
@@ -129,6 +133,8 @@ public class GameController : MonoBehaviour {
         if (InstantiationTimerM <= 0)
         {
             Instantiate(this.Strate, new Vector3(680f, Random.Range(-375f, 375f), 0), Quaternion.identity);
+            Instantiate(this.Strate, new Vector3(680f, Random.Range(-375f, 375f), 0), Quaternion.identity);
+            Instantiate(this.Strate, new Vector3(680f, Random.Range(-375f, 375f), 0), Quaternion.identity);
             InstantiationTimerM = 30f;
         }
     }
@@ -143,8 +149,7 @@ public class GameController : MonoBehaviour {
         this.ScoreLabel.gameObject.SetActive(false);
         this.LivesLabel.gameObject.SetActive(false);
         this.plane.SetActive(false);
-        this.HomingEnemy.SetActive(false);
-        this._endGameSound.Play();
+        this.GameOver.Play();
     }
 
     // PUBLIC METHODS ++++++++++++++++++++++++++++++

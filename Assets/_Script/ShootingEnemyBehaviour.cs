@@ -4,18 +4,20 @@ using System.Collections.Generic;
 
 public class ShootingEnemyBehaviour : MonoBehaviour
 {
+    [Header("GameObject")]
     public Transform laser;
+    // When the enemy dies, we play an explosion
+    public Transform explosion;
+    [Header("Attribute")]
     // How far from the center of the ship should the laser be
     public float laserDistance = 45f;
     // How many times should I be hit before I die
     public int health = 1;
+    public float speed = 500.0f;
 
-    // When the enemy dies, we play an explosion
-    public Transform explosion;
 
     private float InstantiationTimer = 2.0f;
     private Transform player;
-    public float speed = 500.0f;
 
     private GameController controller;
 
