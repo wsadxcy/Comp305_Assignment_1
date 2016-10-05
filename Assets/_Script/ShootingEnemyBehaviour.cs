@@ -19,7 +19,6 @@ public class ShootingEnemyBehaviour : MonoBehaviour
 
     private GameController controller;
 
-    public GameController gameController;
 
     void Rotation()
     {

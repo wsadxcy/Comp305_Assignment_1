@@ -18,6 +18,7 @@ public class Player_Behavior : MonoBehaviour
     // If value is less than or equal 0, we can fire
     private float timeTilNextFire = 0.0f;
 
+    public float timeLeft = 10.0f;
 
     public GameController gameController;
 
@@ -81,6 +82,23 @@ public class Player_Behavior : MonoBehaviour
         {
             this.gameController.LivesValue -= 1;
         }
+        if(other.gameObject.CompareTag("PowerUp"))
+        {
+            RapidFire();
+        }
+    }
 
+
+    IEnumerator RapidFire()
+    {
+        this.timeBetweenFires = 0.1f;
+        // Give the player time before we start the game
+        yield return new WaitForSeconds(3);
+        deactivatePowerup();
+
+    }
+    public void deactivatePowerup()
+    {
+        timeBetweenFires = 0.4f;
     }
 }

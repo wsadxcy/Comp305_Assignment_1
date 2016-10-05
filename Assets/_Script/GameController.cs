@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
     public GameObject Disc;
     public GameObject ShootingEnemy;
     public GameObject Coin;
+    public GameObject Strate;
 
 
 
@@ -34,6 +35,7 @@ public class GameController : MonoBehaviour {
     private float InstantiationTimerH = 5.0f;
     private float InstantiationTimerS = 5.0f;
     private float InstantiationTimerC = 20.0f;
+    private float InstantiationTimerM = 20.0f;
 
     // PUBLIC PROPERTIES +++++++++++++++++++++++++++
     public int LivesValue
@@ -102,6 +104,7 @@ public class GameController : MonoBehaviour {
         InstantiationTimerH -= Time.deltaTime;
         InstantiationTimerS -= Time.deltaTime;
         InstantiationTimerC -= Time.deltaTime;
+        InstantiationTimerM -= Time.deltaTime;
         if (InstantiationTimerD <= 0)
         {
             Instantiate(this.Disc);
@@ -122,6 +125,11 @@ public class GameController : MonoBehaviour {
         {
             Instantiate(this.Coin, new Vector3(680f, Random.Range(-375f, 375f), 0), Quaternion.identity);
             InstantiationTimerC = 50f;
+        }
+        if (InstantiationTimerM <= 0)
+        {
+            Instantiate(this.Strate, new Vector3(680f, Random.Range(-375f, 375f), 0), Quaternion.identity);
+            InstantiationTimerM = 30f;
         }
     }
 
