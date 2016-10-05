@@ -6,7 +6,7 @@ public class BulletBehaviour : MonoBehaviour {
     // How long the laser will live
     public float lifetime = 2.0f;
     // How fast will the laser move
-    public float speed = 500.0f;
+    public float speed = 800.0f;
     // How much damage will this laser do if we hit an enemy
     public int damage = 1;
 

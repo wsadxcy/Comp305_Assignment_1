@@ -3,11 +3,19 @@ using System.Collections;
 
 public class Disc_Behaviour : MonoBehaviour {
 
+
+    // How many times should I be hit before I die
+    public int health = 2;
+
+    // When the enemy dies, we play an explosion
+    public Transform explosion;
+    private Random random = new Random();
+
     // PRIVATE INSTANCE VARIABLES +++++++++++++++++++++++++++++
     private int _speed;
     private int _drift;
     private Transform _transform;
-
+    private GameController controller;
     // PUBLIC PROPERTIES
     public int Speed
     {
@@ -37,6 +45,8 @@ public class Disc_Behaviour : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
+        controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         this._transform = this.GetComponent<Transform>();
         this._reset();
     }
@@ -49,10 +59,40 @@ public class Disc_Behaviour : MonoBehaviour {
         this._rotate();
     }
 
+    void OnCollisionEnter2D(Collision2D theCollision)
+    {
+        // Uncomment this line to check for collision
+        Debug.Log("Hit" + theCollision.gameObject.name);
+        // this line looks for "bullet" in the names of
+        // anything collided.
+        if (theCollision.gameObject.name.Contains("bullet"))
+        {
+            BulletBehaviour bullet =
+                theCollision.gameObject.GetComponent
+                ("BulletBehaviour") as BulletBehaviour;
+            health -= bullet.damage;
+            Destroy(theCollision.gameObject);
+        }
+        if (health <= 0)
+        {
+            // Check if explosion was set
+            if (explosion)
+            {
+                GameObject exploder = ((Transform)Instantiate(explosion, this.
+                    transform.position, this.transform.rotation)).gameObject;
+                Destroy(exploder, 2.0f);
+            }
+
+            Destroy(this.gameObject);
+            controller.IncreaseScore(100);
+        }
+    }
+
+
     /**
      * this method rotate the gameobject each frame
-     */ 
-     private void _rotate()
+     */
+    private void _rotate()
     {
         transform.Rotate(0, 0, 400 * Time.deltaTime);
     }
@@ -89,7 +129,7 @@ public class Disc_Behaviour : MonoBehaviour {
     {
         this.Speed = Random.Range(5, 10);
         this.Drift = Random.Range(-2, 2);
-        this._transform.position = new Vector2(680f, Random.Range(-205f, 205f));
+        this._transform.position = new Vector2(680f, Random.Range(-375f, 375f));
     }
 
 }

@@ -9,17 +9,17 @@ public class Player_Behavior : MonoBehaviour
     // The laser we will be shooting
     public Transform laser;
     // How far from the center of the ship should the laser be
-    public float laserDistance = .2f;
+    public float laserDistance = 45f;
     // The buttons that we can use to shoot lasers
     public List<KeyCode> shootButton;
     // How much time (in seconds) we should wait before
     // we can fire again
-    public float timeBetweenFires = 0.5f;
+    public float timeBetweenFires = 0.4f;
     // If value is less than or equal 0, we can fire
     private float timeTilNextFire = 0.0f;
 
 
-
+    public GameController gameController;
 
     public float Speed;
     public float xMin, xMax, yMin, yMax;
@@ -66,5 +66,21 @@ public class Player_Behavior : MonoBehaviour
         // Calculate the position right in front of the ship's
         // position laserDistance units away
         Instantiate(laser, new Vector3(this.transform.position.x + laserDistance, this.transform.position.y, this.transform.position.z) , this.transform.rotation);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            this.gameController.ScoreValue += 100;
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            this.gameController.LivesValue -= 1;
+        }
+
     }
 }
